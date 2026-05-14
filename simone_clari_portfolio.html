@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simone Clari — Multimediedesigner & Digital Konceptudvikler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg:         #F5F0E8;
+    --bg-card:    #EDEAE0;
+    --bg-dark:    #1A1208;
+    --text:       #1A1208;
+    --text-inv:   #F5F0E8;
+    --muted:      #7A7060;
+    --red:        #6B1020;
+    --olive:      #6B6B00;
+    --olive-light:#B5B500;
+    --cream:      #F5F0E8;
+    --sand:       #D4C9A8;
+    --border:     rgba(26,18,8,0.12);
+    --border-dark:rgba(26,18,8,0.25);
+    --serif:      'Fraunces', serif;
+    --sans:       'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── Grain ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.3rem 4rem;
+    background: rgba(245,240,232,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-logo span { color: var(--olive); font-style: italic; }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--red); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 5rem 3rem 5rem 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(4rem, 7vw, 7.5rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    opacity: 0;
+    transform: translateY(28px);
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+
+  .hero-name .line2 {
+    color: var(--olive);
+    font-style: italic;
+    font-weight: 300;
+    display: block;
+    font-size: clamp(3.2rem, 5.5vw, 6rem);
+  }
+
+  .hero-sub {
+    margin-top: 2.5rem;
+    max-width: 38ch;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.85;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.7s 0.55s forwards;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.6s 0.75s forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.9em 2em;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: var(--cream);
+  }
+  .btn-primary:hover { background: #8a1428; }
+
+  .btn-outline {
+    border: 1.5px solid var(--border-dark);
+    color: var(--text);
+  }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── Hero right: image collage ── */
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--olive);
+  }
+
+  .hero-img-main {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    mix-blend-mode: multiply;
+    opacity: 0.75;
+    filter: saturate(0.8);
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 3rem;
+    left: -1.5rem;
+    background: var(--red);
+    color: var(--cream);
+    padding: 1.5rem 2rem;
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    font-style: italic;
+    line-height: 1.4;
+    max-width: 200px;
+    box-shadow: 4px 4px 0 var(--text);
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: fadeUp 0.7s 1s forwards;
+  }
+
+  .hero-badge strong {
+    display: block;
+    font-family: var(--sans);
+    font-style: normal;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+    opacity: 0.7;
+  }
+
+  /* ── Ticker ── */
+  .ticker {
+    background: var(--text);
+    color: var(--cream);
+    padding: 0.8rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-flex;
+    gap: 0;
+    animation: ticker 28s linear infinite;
+  }
+
+  .ticker-item {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0 3rem;
+    opacity: 0.7;
+  }
+
+  .ticker-dot {
+    color: var(--olive-light);
+    opacity: 1 !important;
+    padding: 0;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── Sections ── */
+  .section {
+    padding: 7rem 4rem;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 4rem;
+  }
+
+  .section-title em { color: var(--olive); font-style: italic; }
+
+  /* ── Works ── */
+  #works { padding-top: 5rem; }
+
+  .works-intro {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+    gap: 2rem;
+  }
+
+  .works-intro .section-title { margin-bottom: 0; }
+
+  .works-count {
+    font-family: var(--serif);
+    font-size: 5rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--sand);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(.25,.8,.25,1), box-shadow 0.3s;
+    cursor: pointer;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(26,18,8,0.12);
+  }
+
+  .card-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(.25,.8,.25,1);
+    background: var(--sand);
+  }
+
+  .project-card:hover .card-image { transform: scale(1.03); }
+
+  .card-image-wrap {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card-accent-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+  }
+
+  .accent-red   { background: var(--red); }
+  .accent-olive { background: var(--olive); }
+  .accent-gold  { background: var(--olive-light); }
+
+  .card-body {
+    padding: 2rem 2.2rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .card-number {
+    font-family: var(--serif);
+    font-size: 0.7rem;
+    color: var(--sand);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+  }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 2vw, 1.85rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.8rem;
+    color: var(--text);
+    transition: color 0.2s;
+  }
+
+  .project-card:hover .card-title { color: var(--red); }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.8;
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3em 0.8em;
+    background: var(--bg);
+    border: 1px solid var(--border-dark);
+    color: var(--muted);
+  }
+
+  .card-link {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s, gap 0.2s;
+  }
+
+  .project-card:hover .card-link { color: var(--red); gap: 0.9rem; }
+
+  /* ── Experience ── */
+  #experience { background: var(--text); color: var(--text-inv); }
+
+  #experience .section-title { color: var(--text-inv); }
+  #experience .section-label { color: var(--olive-light); }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-top: 0;
+  }
+
+  .exp-card {
+    background: #231B0F;
+    padding: 3rem;
+    border: 1px solid rgba(245,240,232,0.06);
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+  }
+
+  .exp-card.current::before { background: var(--olive-light); }
+  .exp-card.past::before    { background: var(--red); }
+  .exp-card.edu::before     { background: var(--sand); }
+
+  .exp-card:hover { background: #2C2214; }
+
+  .exp-period {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .exp-period.current { color: var(--olive-light); }
+  .exp-period.past    { color: var(--red); }
+  .exp-period.edu     { color: var(--sand); }
+
+  .exp-company {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text-inv);
+    margin-bottom: 0.3rem;
+  }
+
+  .exp-role {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    margin-bottom: 1.5rem;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.65;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    font-size: 0.5rem;
+    top: 0.35rem;
+    color: rgba(245,240,232,0.25);
+  }
+
+  .exp-grade {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--sand);
+  }
+
+  /* ── About ── */
+  #about {
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-left { position: sticky; top: 7rem; }
+
+  .about-portrait {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    border: 3px solid var(--text);
+    box-shadow: 8px 8px 0 var(--olive);
+    margin-bottom: 2rem;
+    background: var(--sand);
+  }
+
+  .about-contact-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-item:hover { color: var(--red); }
+
+  .contact-icon {
+    width: 28px; height: 28px;
+    background: var(--text);
+    color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .about-right { padding-top: 0.5rem; }
+
+  .about-heading {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 2.5rem;
+  }
+
+  .about-heading em { color: var(--olive); font-style: italic; }
+
+  .about-body p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 1.4rem;
+  }
+
+  .about-body p strong { color: var(--text); font-weight: 500; }
+
+  /* ── Skills grid ── */
+  .skills-block {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .skill-group h4 {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-group p {
+    font-size: 0.82rem !important;
+    color: var(--muted) !important;
+    line-height: 1.7 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* ── Languages ── */
+  .lang-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .lang-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .lang-name {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .lang-dots {
+    display: flex;
+    gap: 4px;
+  }
+
+  .lang-dot {
+    width: 10px; height: 10px;
+    background: var(--border-dark);
+  }
+
+  .lang-dot.filled { background: var(--red); }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--text);
+    color: var(--text-inv);
+    padding: 4rem 4rem 3rem;
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    gap: 3rem;
+  }
+
+  .footer-name {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    color: var(--text-inv);
+  }
+
+  .footer-name em { color: var(--olive-light); font-style: italic; font-weight: 300; }
+
+  .footer-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 0.5rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end;
+  }
+
+  .footer-links a {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--olive-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(245,240,232,0.1);
+    padding-top: 1.5rem;
+    font-size: 0.7rem;
+    color: rgba(245,240,232,0.3);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── Decorative blob ── */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(.25,.8,.25,1), transform 0.7s cubic-bezier(.25,.8,.25,1);
+  }
+
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── Cursor ── */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--red);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+  }
+
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid rgba(107,16,32,0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.4s cubic-bezier(.25,.8,.25,1), width 0.3s, height 0.3s;
+    transform: translate(-50%, -50%);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1000px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 8rem 2.5rem 4rem; }
+  }
+
+  @media (max-width: 860px) {
+    nav { padding: 1.1rem 1.8rem; }
+    .section { padding: 5rem 1.8rem; }
+    .works-grid { grid-template-columns: 1fr; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-left { position: static; }
+    .footer-top { flex-direction: column; }
+    .footer-right { text-align: left; }
+    .footer-links { justify-content: flex-start; }
+    .skills-block { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 560px) {
+    .nav-links { display: none; }
+    .hero-name { font-size: 3rem; }
+    .works-intro { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Simone <span>Clari</span></a>
+  <ul class="nav-links">
+    <li><a href="#works">Projekter</a></li>
+    <li><a href="#experience">Erfaring</a></li>
+    <li><a href="#about">Om mig</a></li>
+    <li><a href="mailto:simoneclari@gmail.com">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Multimediedesigner &amp; Digital Konceptudvikler</p>
+    <h1 class="hero-name">
+      Simone<br>
+      <span class="line2">Clari.</span>
+    </h1>
+    <p class="hero-sub">
+      Baseret i København Ø. Jeg bygger digitale oplevelser fra idé til lancering — med et stærkt visuelt blik, solide frontend-kompetencer og sans for detaljen.
+    </p>
+    <div class="hero-cta">
+      <a href="#works" class="btn btn-primary">Se projekter →</a>
+      <a href="mailto:simoneclari@gmail.com" class="btn btn-outline">Skriv til mig</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <img
+      class="hero-img-main"
+      src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80&fit=crop"
+      alt="Simone Clari — Multimediedesigner"
+    />
+    <div class="hero-badge">
+      <strong>Nu tilgængelig</strong>
+      Søger deltidsstilling ved siden af PBA
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="ticker">
+    <span class="ticker-item">WordPress</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Figma</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">HTML &amp; CSS</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">JavaScript</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Astro</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Tailwind</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">UX/UI Design</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Photoshop</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Illustrator</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Midjourney</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Figma AI</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Procreate</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Premier Pro</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Digital Strategi</span><span class="ticker-item ticker-dot">✦</span>
+    <!-- repeat for seamless loop -->
+    <span class="ticker-item">WordPress</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Figma</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">HTML &amp; CSS</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">JavaScript</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Astro</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Tailwind</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">UX/UI Design</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Photoshop</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Illustrator</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Midjourney</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Figma AI</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Procreate</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Premier Pro</span><span class="ticker-item ticker-dot">✦</span>
+    <span class="ticker-item">Digital Strategi</span><span class="ticker-item ticker-dot">✦</span>
+  </div>
+</div>
+
+<!-- WORKS -->
+<section class="section" id="works">
+  <div class="works-intro reveal">
+    <div>
+      <span class="section-label">Portfolio</span>
+      <h2 class="section-title">Udvalgte<br><em>projekter.</em></h2>
+    </div>
+    <div class="works-count">06</div>
+  </div>
+
+  <div class="works-grid">
+
+    <a class="project-card reveal" href="https://tothaven.netlify.app/" target="_blank" rel="noopener">
+      <div class="card-image-wrap">
+        <img class="card-image" src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&q=75&fit=crop" alt="Tothaven Besøgsgård" loading="lazy" />
+        <div class="card-accent-bar accent-olive"></div>
+      </div>
+      <div class="card-body">
+        <span class="card-number">01</span>
+        <h3 class="card-title">Tothaven Besøgsgård</h3>
+        <p class="card-desc">Komplet website-redesign for en familiefarm med opgraderet billetssystem. Fokus på forbedret brugeroplevelse, mens stedets ægte, familievenlige atmosfære bevares.</p>
+        <div class="card-tags">
+          <span class="tag">Web Design</span>
+          <span class="tag">UX/UI</span>
+          <span class="tag">E-commerce</span>
+        </div>
+        <div class="card-link">Se projekt <span>→</span></div>
+      </div>
+    </a>
+
+    <a class="project-card reveal" href="https://www.figma.com/design/PZX1Yr5VllNb0OVseSs2h1/hojskolendk?node-id=35-621&p=f&t=WyQ40yUjx3wxuvMm-0" target="_blank" rel="noopener">
+      <div class="card-image-wrap">
+        <img class="card-image" src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=800&q=75&fit=crop" alt="Højskolendk" loading="lazy" />
+        <div class="card-accent-bar accent-red"></div>
+      </div>
+      <div class="card-body">
+        <span class="card-number">02</span>
+        <h3 class="card-title">Højskolendk</h3>
+        <p class="card-desc">Redesign-prototype af rejsehøjskoles website med fokus på at inspirere unge til at udforske uddannelsesmuligheder i udlandet. Visual storytelling og klar informationsarkitektur.</p>
+        <div class="card-tags">
+          <span class="tag">Prototype</span>
+          <span class="tag">Uddannelse</span>
+          <span class="tag">Rejse</span>
+        </div>
+        <div class="card-link">Se projekt <span>→</span></div>
+      </div>
+    </a>
+
+    <a class="project-card reveal" href="https://monten2semester.netlify.app/" target="_blank" rel="noopener">
+      <div class="card-image-wrap">
+        <img class="card-image" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=75&fit=crop" alt="Café Mønten" loading="lazy" />
+        <div class="card-accent-bar accent-gold"></div>
+      </div>
+      <div class="card-body">
+        <span class="card-number">03</span>
+        <h3 class="card-title">Café Mønten</h3>
+        <p class="card-desc">Website-redesign med dag/nat-toggle der transformerer sitet mellem café- og bartilstand — afspejler stedets dobbelte personlighed og skiftende stemning.</p>
+        <div class="card-tags">
+          <span class="tag">Interaktivt</span>
+          <span class="tag">Hospitality</span>
+          <span class="tag">Animation</span>
+        </div>
+        <div class="card-link">Se projekt <span>→</span></div>
+      </div>
+    </a>
+
+    <a class="project-card reveal" href="https://www.figma.com/design/vyDvCE6VR3JANuRN12sILQ/Projekt-01?node-id=0-1&t=MlbpYRqElo0bh0s0-1" target="_blank" rel="noopener">
+      <div class="card-image-wrap">
+        <img class="card-image" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=75&fit=crop" alt="Bronco Buster" loading="lazy" />
+        <div class="card-accent-bar accent-olive"></div>
+      </div>
+      <div class="card-body">
+        <span class="card-number">04</span>
+        <h3 class="card-title">Bronco Buster</h3>
+        <p class="card-desc">Selvinitieret koncept for et minimalistisk streetwear-brand med dæmpede farver og high-fashion sensibilitet. Fuld proces: wireframes, moodboards og komplet visuel identitet.</p>
+        <div class="card-tags">
+          <span class="tag">Branding</span>
+          <span class="tag">E-commerce</span>
+          <span class="tag">Wireframes</span>
+          <span class="tag">Fashion</span>
+        </div>
+        <div class="card-link">Se projekt <span>→</span></div>
+      </div>
+    </a>
+
+    <div class="project-card reveal">
+      <div class="card-image-wrap">
+        <img class="card-image" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&q=75&fit=crop" alt="DIYou — Danmarks Ishockey Union" loading="lazy" style="filter: grayscale(0.3);" />
+        <div class="card-accent-bar accent-red"></div>
+      </div>
+      <div class="card-body">
+        <span class="card-number">05</span>
+        <h3 class="card-title">DIYou — Danmarks Ishockey Union</h3>
+        <p class="card-desc">Digitalt koncept udviklet under PBA til at tiltrække yngre målgrupper til dansk ishockey. Baseret på kvalitative interviews og spørgeundersøgelser — med fokus på parasociale spillerforbindelser.</p>
+        <div class="card-tags">
+          <span class="tag">Konceptudvikling</span>
+          <span class="tag">UX Research</span>
+          <span class="tag">App Design</span>
+          <span class="tag">Strategi</span>
+        </div>
+        <div class="card-link" style="color: var(--sand); cursor: default;">Case study — Coming Soon</div>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="card-image-wrap">
+        <img class="card-image" src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=800&q=75&fit=crop" alt="Rigshospitalet Knowledge Platform" loading="lazy" style="filter: grayscale(0.2);" />
+        <div class="card-accent-bar accent-gold"></div>
+      </div>
+      <div class="card-body">
+        <span class="card-number">06</span>
+        <h3 class="card-title">Rigshospitalet — Vidensplatform</h3>
+        <p class="card-desc">UX-research og digitalt koncept for intern vidensdelingsplatform på et af Skandinaviens største hospitaler. Udviklet via personas og empathy mapping for tre distinkte målgrupper.</p>
+        <div class="card-tags">
+          <span class="tag">UX Research</span>
+          <span class="tag">Healthcare</span>
+          <span class="tag">Personas</span>
+          <span class="tag">Digitalt Koncept</span>
+        </div>
+        <div class="card-link">Se projekt <span>→</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <span class="section-label">Erfaring &amp; Uddannelse</span>
+  <h2 class="section-title reveal" style="color: var(--text-inv);">Hvad jeg<br><em>har gjort.</em></h2>
+
+  <div class="exp-grid">
+
+    <div class="exp-card current reveal">
+      <div class="exp-period current">Aug. 2025 – Nu</div>
+      <div class="exp-company">Generaxion</div>
+      <div class="exp-role">Webdesigner Assistent · Deltid</div>
+      <ul class="exp-bullets">
+        <li>Designede og opbyggede corporate websites fra start til slut — bl.a. for Upsign og KF Maler</li>
+        <li>Bidrog til oprettelse og optimering af 30+ websites på tværs af brancher</li>
+        <li>Kvalitetscheck, responsivitetsoptimering og vedligeholdelse i WordPress og Divi</li>
+        <li>Samarbejdede med SEO-afdelingen om tekniske forbedringer</li>
+        <li>Kundekommunikation via HelpScout</li>
+      </ul>
+    </div>
+
+    <div class="exp-card past reveal">
+      <div class="exp-period past">Okt. 2020 – Jan. 2024</div>
+      <div class="exp-company">Nordvarme.dk</div>
+      <div class="exp-role">Digital Marketing · Fuldtid</div>
+      <ul class="exp-bullets">
+        <li>Designede markedsføringsindhold til Facebook og Instagram med fokus på øget synlighed</li>
+        <li>Logoer, merchandise og grafik til firmabiler i Figma, Photoshop og Illustrator</li>
+        <li>Redesignede og genopbyggede nordvarme.dk i Figma og WordPress/Divi</li>
+      </ul>
+    </div>
+
+    <div class="exp-card edu reveal">
+      <div class="exp-period edu">Jan. 2026 – Nu</div>
+      <div class="exp-company">Digital Konceptudvikling (PBA)</div>
+      <div class="exp-role">Erhvervsakademi</div>
+      <ul class="exp-bullets">
+        <li>Top-up uddannelse med fokus på strategi, konceptudvikling og databaseret analyse</li>
+        <li>Projekter med virkelige klienter — DIYou og Rigshospitalet</li>
+      </ul>
+    </div>
+
+    <div class="exp-card edu reveal">
+      <div class="exp-period edu">Jan. 2024 – Jan. 2026</div>
+      <div class="exp-company">Multimediedesigner (AK)</div>
+      <div class="exp-role">Erhvervsakademi · Karakter: 11,5</div>
+      <ul class="exp-bullets">
+        <li>Web design, UX/UI, frontend-udvikling, branding og digital kommunikation</li>
+        <li>Afsluttet med karakteren 11,5</li>
+      </ul>
+      <span class="exp-grade">Karakter: 11,5 ✦</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-grid">
+
+    <div class="about-left reveal">
+      <img
+        class="about-portrait"
+        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80&fit=crop&fp-y=0.3"
+        alt="Simone Clari"
+      />
+      <div class="about-contact-row">
+        <a href="mailto:simoneclari@gmail.com" class="contact-item">
+          <span class="contact-icon">✉</span>
+          simoneclari@gmail.com
+        </a>
+        <a href="tel:+4528570021" class="contact-item">
+          <span class="contact-icon">☎</span>
+          +45 28 57 00 21
+        </a>
+        <a href="https://www.linkedin.com/in/simone-c-a31a041b0/" target="_blank" rel="noopener" class="contact-item">
+          <span class="contact-icon">in</span>
+          LinkedIn
+        </a>
+        <span class="contact-item">
+          <span class="contact-icon">◎</span>
+          København Ø
+        </span>
+      </div>
+    </div>
+
+    <div class="about-right reveal">
+      <h2 class="about-heading">
+        Hvem er<br><em>jeg?</em>
+      </h2>
+      <div class="about-body">
+        <p>
+          Jeg er <strong>Simone Clari</strong> — multimediedesigner med hands-on erfaring i at bygge corporate websites fra idé til lancering, selvstændigt og med minimal sparring.
+        </p>
+        <p>
+          Jeg sætter mig hurtigt ind i nye systemer, workflows og krav, og leverer gennemarbejdet output uden at skulle holdes i hånden. Jeg kombinerer et stærkt visuelt blik med solide frontend-kompetencer og sans for detaljen.
+        </p>
+        <p>
+          Jeg søger en <strong>deltidsstilling</strong> ved siden af min PBA i Digital Konceptudvikling — hvor jeg kan bidrage med både design og teknisk implementering.
+        </p>
+
+        <div class="skills-block">
+          <div class="skill-group">
+            <h4>Web &amp; CMS</h4>
+            <p>WordPress, Divi, HTML, CSS, JavaScript, Tailwind, Astro, VS Code, Responsive design</p>
+          </div>
+          <div class="skill-group">
+            <h4>Design</h4>
+            <p>Figma, Photoshop, Illustrator, Procreate, Premier Pro, UX/UI, Grafisk design, Visuel identitet</p>
+          </div>
+          <div class="skill-group">
+            <h4>AI-værktøjer</h4>
+            <p>Figma AI, Adobe Firefly, Google Stitch, Midjourney</p>
+          </div>
+          <div class="skill-group">
+            <h4>Kompetencer</h4>
+            <p>Digital strategi, Databaseret analyse, E-commerce, Projektledelse, SoMe, HelpScout</p>
+          </div>
+        </div>
+
+        <div class="lang-row">
+          <div class="lang-item">
+            <span class="lang-name">Dansk</span>
+            <div class="lang-dots">
+              <div class="lang-dot filled"></div>
+              <div class="lang-dot filled"></div>
+              <div class="lang-dot filled"></div>
+              <div class="lang-dot filled"></div>
+              <div class="lang-dot filled"></div>
+            </div>
+          </div>
+          <div class="lang-item">
+            <span class="lang-name">Engelsk</span>
+            <div class="lang-dots">
+              <div class="lang-dot filled"></div>
+              <div class="lang-dot filled"></div>
+              <div class="lang-dot filled"></div>
+              <div class="lang-dot filled"></div>
+              <div class="lang-dot filled"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-name">
+      Simone<br><em>Clari.</em>
+    </div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="mailto:simoneclari@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/simone-c-a31a041b0/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="tel:+4528570021">+45 28 57 00 21</a>
+      </div>
+      <p style="font-size:0.75rem; color: rgba(245,240,232,0.35); font-family: var(--serif); font-style: italic;">Selvkørende · Hurtig lærer · Detaljeorienteret</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Simone Clari — Multimediedesigner &amp; Digital Konceptudvikler, København Ø</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        const siblings = e.target.closest('.works-grid, .exp-grid');
+        const delay = siblings
+          ? Array.from(siblings.children).indexOf(e.target) * 80
+          : 0;
+        setTimeout(() => e.target.classList.add('visible'), delay);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => io.observe(el));
+
+  // Custom cursor (desktop only)
+  if (window.matchMedia('(pointer: fine)').matches) {
+    const dot  = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function tick() {
+      rx += (mx - rx) * 0.13;
+      ry += (my - ry) * 0.13;
+      dot.style.left  = mx + 'px'; dot.style.top  = my + 'px';
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(tick);
+    }
+    tick();
+    document.querySelectorAll('a, .project-card').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.width = ring.style.height = '56px'; ring.style.borderColor = 'rgba(107,16,32,0.7)'; });
+      el.addEventListener('mouseleave', () => { ring.style.width = ring.style.height = '36px'; ring.style.borderColor = 'rgba(107,16,32,0.4)'; });
+    });
+  } else {
+    document.getElementById('cursor').style.display = 'none';
+    document.getElementById('cursorRing').style.display = 'none';
+  }
+</script>
+</body>
+</html>
